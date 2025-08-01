@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom"
+import "../styles/BlogList.css"
+
 type Post = {
   id: string
   title: string
@@ -5,16 +8,17 @@ type Post = {
 }
 
 type BlogListProps = {
-  posts?: Post[] // make optional
+  posts?: Post[]
 }
 
 export default function BlogList({ posts = [] }: BlogListProps) {
   return (
-    <div className="space-y-4">
+    <div className="blog-list">
       {posts.map(post => (
-        <div key={post.id} className="bg-gray-800 p-4 rounded shadow">
-          <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-          <p className="text-sm text-gray-300">{post.content.slice(0, 100)}...</p>
+        <div key={post.id} className="blog-card">
+          <h2 className="blog-title">{post.title}</h2>
+          <p className="blog-snippet">{post.content.slice(0, 100)}...</p>
+          <Link to={`/post/${post.id}`} className="read-more">Read More →</Link>
         </div>
       ))}
     </div>

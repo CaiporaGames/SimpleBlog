@@ -1,18 +1,29 @@
+// src/App.tsx
 import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import PostPage from "./pages/PostPage"
-import Navbar from "./components/Navbar"
+import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
-function App() {
-  return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/post/:id" element={<PostPage />} />
-      </Routes>
-    </div>
-  )
+export type Post = {
+  id: string
+  title: string
+  content: string
 }
 
-export default App
+export default function App() 
+{
+  const [posts, setPosts] = useState<Post[]>([])
+
+  function handleAddPost(title: string, content: string) {
+    const newPost: Post = { id: uuidv4(), title, content }
+    setPosts(prev => [newPost, ...prev])
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home posts={posts} onAddPost={handleAddPost} />} />
+      <Route path="/post/:id" element={<PostPage allPosts={posts} />} />
+    </Routes>
+  )
+}
