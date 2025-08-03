@@ -1,0 +1,19 @@
+.post-container {
+  background-color: #1f2937; /* gray-800 */
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.post-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.post-content {
+  white-space: pre-wrap;
+  color: #d1d5db; /* gray-300 */
+  line-height: 1.75;
+}
